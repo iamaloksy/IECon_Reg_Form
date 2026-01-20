@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 28 92% 54%;
+    --primary-foreground: 222 47% 7%;
+
+    --secondary: 217 65% 33%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 30% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 65% 33%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 30% 20%;
+    --input: 217 30% 18%;
+    --ring: 28 92% 54%;
+
+    --radius: 0.75rem;
+
+    /* Custom IECON colors */
+    --iecon-navy: 222 47% 7%;
+    --iecon-navy-light: 222 40% 12%;
+    --iecon-orange: 28 92% 54%;
+    --iecon-orange-glow: 28 100% 60%;
+    --iecon-blue: 217 65% 33%;
+    --iecon-blue-light: 217 70% 45%;
+    --iecon-gold: 45 93% 58%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--iecon-navy)) 0%, hsl(222 50% 10%) 50%, hsl(var(--iecon-navy)) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--iecon-orange)) 0%, hsl(var(--iecon-orange-glow)) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(var(--iecon-blue)) 0%, hsl(var(--iecon-blue-light)) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(222 47% 12% / 0.8) 0%, hsl(222 47% 8% / 0.9) 100%);
+    
+    /* Shadows */
+    --shadow-glow-orange: 0 0 40px hsl(var(--iecon-orange) / 0.3);
+    --shadow-glow-blue: 0 0 40px hsl(var(--iecon-blue) / 0.3);
+    --shadow-card: 0 8px 32px hsl(222 47% 5% / 0.6);
+    --shadow-elevated: 0 20px 60px hsl(222 47% 3% / 0.8);
+
+    --sidebar-background: 222 47% 7%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 28 92% 54%;
+    --sidebar-primary-foreground: 222 47% 7%;
+    --sidebar-accent: 217 65% 33%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 30% 20%;
+    --sidebar-ring: 28 92% 54%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-xl border border-border/50;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+  
+  .glass-card-elevated {
+    @apply backdrop-blur-xl border border-border/30;
+    background: linear-gradient(180deg, hsl(222 47% 14% / 0.9) 0%, hsl(222 47% 10% / 0.95) 100%);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+
+  .glow-orange {
+    box-shadow: var(--shadow-glow-orange);
+  }
+
+  .glow-blue {
+    box-shadow: var(--shadow-glow-blue);
+  }
+
+  .highlight-badge {
+    @apply px-4 py-2 rounded-full text-sm font-medium;
+    background: linear-gradient(135deg, hsl(var(--iecon-orange) / 0.15) 0%, hsl(var(--iecon-orange) / 0.05) 100%);
+    border: 1px solid hsl(var(--iecon-orange) / 0.3);
+    color: hsl(var(--iecon-orange));
+  }
+
+  .deadline-banner {
+    @apply relative overflow-hidden;
+    background: linear-gradient(90deg, hsl(var(--iecon-orange)) 0%, hsl(var(--iecon-gold)) 50%, hsl(var(--iecon-orange)) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .progress-step {
+    @apply relative flex items-center justify-center w-10 h-10 rounded-full text-sm font-semibold transition-all duration-300;
+  }
+
+  .progress-step.active {
+    background: var(--gradient-primary);
+    @apply text-primary-foreground glow-orange;
+  }
+
+  .progress-step.completed {
+    background: var(--gradient-accent);
+    @apply text-accent-foreground glow-blue;
+  }
+
+  .progress-step.pending {
+    @apply bg-muted text-muted-foreground;
+  }
+
+  .form-section {
+    @apply p-6 md:p-8 rounded-2xl glass-card-elevated;
+  }
+
+  .input-field {
+    @apply bg-input border-border/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
