@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Trophy, Users, Lightbulb, TrendingUp, Calendar } from "lucide-react";
+import { Trophy, Users, Lightbulb, TrendingUp, Calendar, Sun, Moon } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
 import ieconLogo from "@/assets/iecon-logo.png";
 
 const highlights = [
@@ -10,6 +11,8 @@ const highlights = [
 ];
 
 const HeroSection = () => {
+  const { theme, setTheme } = useTheme();
+  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
   return (
     <section className="relative overflow-hidden py-12 lg:py-20">
       {/* Background decorations */}
@@ -19,6 +22,21 @@ const HeroSection = () => {
       </div>
 
       <div className="container relative z-10 px-4 mx-auto max-w-6xl">
+        {/* Theme Toggle */}
+        <div className="absolute right-4 top-4 z-20">
+          <button
+            aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+            onClick={toggleTheme}
+            className="rounded-full p-2 bg-background border border-border shadow hover:bg-muted transition-colors"
+            type="button"
+          >
+            {theme === "light" ? (
+              <Moon className="w-5 h-5 text-foreground" />
+            ) : (
+              <Sun className="w-5 h-5 text-yellow-400" />
+            )}
+          </button>
+        </div>
         {/* Logo and Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

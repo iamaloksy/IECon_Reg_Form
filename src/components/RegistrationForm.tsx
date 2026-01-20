@@ -39,6 +39,7 @@ interface RegistrationFormProps {
 const RegistrationForm = ({ onSuccess }: RegistrationFormProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSubmittingModal, setShowSubmittingModal] = useState(false);
 
   const form = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
@@ -142,10 +143,10 @@ const RegistrationForm = ({ onSuccess }: RegistrationFormProps) => {
   }
 
   const onSubmit = async (data: RegistrationFormData) => {
+    setShowSubmittingModal(true);
     setIsSubmitting(true);
     try {
       await submitForm(data);
-      // Since mode: 'no-cors' is used, we cannot check the response, so always show success
       toast({
         title: "Registration Successful!",
         description: "Your application has been submitted successfully.",
@@ -159,6 +160,7 @@ const RegistrationForm = ({ onSuccess }: RegistrationFormProps) => {
       });
     } finally {
       setIsSubmitting(false);
+      setTimeout(() => setShowSubmittingModal(false), 600); // fade out after submit
     }
   };
 
@@ -255,6 +257,21 @@ const RegistrationForm = ({ onSuccess }: RegistrationFormProps) => {
           </div>
         </form>
       </div>
+      {showSubmittingModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-card text-card-foreground rounded-2xl p-8 shadow-xl flex flex-col items-center max-w-sm w-full animate-pulse">
+            <Loader2 className="w-10 h-10 mb-4 animate-spin text-primary" />
+            <h3 className="text-lg font-semibold mb-2 text-center">Please do not close this window</h3>
+            <p className="text-center text-muted-foreground mb-2">Your registration is being processed. This may take a few minutes.</p>
+            <div className="flex items-center justify-center gap-1 text-primary font-bold text-lg mt-2">
+              Processing
+              <span className="animate-bounce">.</span>
+              <span className="animate-bounce delay-150">.</span>
+              <span className="animate-bounce delay-300">.</span>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
