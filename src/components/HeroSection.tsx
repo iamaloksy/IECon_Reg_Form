@@ -26,14 +26,16 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-10"
         >
-          <motion.img
-            src={ieconLogo}
-            alt="IECON'26 Logo"
-            className="h-24 md:h-32 mx-auto mb-6"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          />
+          <a href="https://www.ieconlpu.com/" target="_blank" rel="noopener noreferrer">
+            <motion.img
+              src={ieconLogo}
+              alt="IECON'26 Logo"
+              className="h-24 md:h-32 mx-auto mb-6"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            />
+          </a>
           
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
             <span className="text-foreground">Indian Entrepreneurship</span>
@@ -82,7 +84,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Deadline Banner */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 1 }}
@@ -92,7 +94,7 @@ const HeroSection = () => {
           <span className="text-primary-foreground font-display font-bold text-lg md:text-xl">
             Registration Deadline: 5th February 2026
           </span>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

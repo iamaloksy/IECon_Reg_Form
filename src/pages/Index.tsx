@@ -29,10 +29,10 @@ const Index = () => {
       <footer className="py-8 border-t border-border/50">
         <div className="container px-4 mx-auto max-w-6xl text-center">
           <p className="text-sm text-muted-foreground">
-            © 2026 Indian Entrepreneurship Conclave. All rights reserved.
+            © 2026 IECON - Indian Entrepreneurship Conclave. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            Organized by Lovely Professional University
+            Organized by Department of Entrepreneurship & Startups, Lovely Professional University
           </p>
         </div>
       </footer>
