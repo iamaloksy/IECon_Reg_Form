@@ -3,6 +3,7 @@ import { UseFormReturn } from "react-hook-form";
 import { RegistrationFormData } from "@/lib/formSchema";
 import FileUpload from "@/components/FileUpload";
 import { QrCode, AlertCircle } from "lucide-react";
+import paymentQR from "@/assets/payment QR.png";
 
 interface PaymentStepProps {
   form: UseFormReturn<RegistrationFormData>;
@@ -29,15 +30,17 @@ const PaymentStep = ({ form }: PaymentStepProps) => {
       <div className="space-y-6">
         {/* Payment QR Code Section */}
         <div className="glass-card rounded-xl p-6 text-center">
-          <div className="w-48 h-48 mx-auto mb-4 bg-muted rounded-xl flex items-center justify-center border-2 border-dashed border-border">
-            <div className="text-center">
-              <QrCode className="w-16 h-16 text-muted-foreground mx-auto mb-2" />
-              <p className="text-xs text-muted-foreground">Payment QR Code</p>
+            <div className="w-48 h-48 mx-auto mb-4 bg-muted rounded-xl flex items-center justify-center border-2 border-dashed border-border">
+              <img
+                src={paymentQR}
+                alt="Payment QR Code"
+                className="w-full h-full object-contain rounded-xl"
+              />
             </div>
-          </div>
+            <p className="text-xs text-muted-foreground mb-2">Scan this QR code to pay</p>
           
           <h4 className="text-lg font-semibold text-foreground mb-2">
-            Registration Fee: ₹500
+            Registration Fee: ₹499
           </h4>
           
           <div className="flex items-start gap-2 text-left bg-primary/5 rounded-lg p-3 mt-4">
@@ -46,7 +49,7 @@ const PaymentStep = ({ form }: PaymentStepProps) => {
               <p className="font-medium text-foreground mb-1">Payment Instructions:</p>
               <ol className="list-decimal list-inside space-y-1">
                 <li>Scan the QR code using any UPI app</li>
-                <li>Complete the payment of ₹500</li>
+                <li>Complete the payment of ₹499</li>
                 <li>Take a screenshot of the payment confirmation</li>
                 <li>Upload the screenshot below</li>
               </ol>
