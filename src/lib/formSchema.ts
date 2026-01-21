@@ -1,15 +1,16 @@
 import { z } from "zod";
 
+
 export const registrationSchema = z.object({
   // Section 1 - Association with LPU
   isLPUStudent: z.enum(["yes", "no"], {
     required_error: "Please select if you are a student at LPU",
   }),
 
-  // Section 2 - Academic Details
-  registrationNumber: z.string().min(1, "Registration number is required"),
-  degreeProgram: z.string().min(1, "Degree & Program is required"),
-  currentYear: z.string().min(1, "Current year of degree is required"),
+  // Section 2 - Academic Details (conditionally required)
+  registrationNumber: z.string().optional(),
+  degreeProgram: z.string().optional(),
+  currentYear: z.string().optional(),
 
   // Section 3 - Startup Details
   problemStatement: z.string().min(50, "Problem statement must be at least 50 characters"),
@@ -35,6 +36,30 @@ export const registrationSchema = z.object({
   declaration: z.boolean().refine((val) => val === true, {
     message: "You must agree to the declaration to submit",
   }),
+}).superRefine((data, ctx) => {
+  if (data.isLPUStudent === "yes") {
+    if (!data.registrationNumber || data.registrationNumber.trim() === "") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["registrationNumber"],
+        message: "Registration number is required",
+      });
+    }
+    if (!data.degreeProgram || data.degreeProgram.trim() === "") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["degreeProgram"],
+        message: "Degree & Program is required",
+      });
+    }
+    if (!data.currentYear || data.currentYear.trim() === "") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["currentYear"],
+        message: "Current year of degree is required",
+      });
+    }
+  }
 });
 
 export type RegistrationFormData = z.infer<typeof registrationSchema>;

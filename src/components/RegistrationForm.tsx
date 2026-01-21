@@ -89,13 +89,29 @@ const RegistrationForm = ({ onSuccess }: RegistrationFormProps) => {
       return;
     }
     const isValid = await validateCurrentStep();
-    if (isValid && currentStep < totalSteps) {
+    if (!isValid) return;
+
+    // Custom step logic: skip Academic step if not LPU student
+    if (currentStep === 1) {
+      const isLPUStudent = form.getValues("isLPUStudent");
+      if (isLPUStudent === "no") {
+        setCurrentStep(3); // Skip to Startup step
+        return;
+      }
+    }
+
+    if (currentStep < totalSteps) {
       setCurrentStep((prev) => prev + 1);
     }
   }
 
   const handlePrevious = () => {
     if (currentStep > 1) {
+      // If user is on Startup step and isLPUStudent is 'no', go directly to LPU step (skip Academic)
+      if (currentStep === 3 && form.getValues("isLPUStudent") === "no") {
+        setCurrentStep(1);
+        return;
+      }
       setCurrentStep((prev) => prev - 1);
     }
   };
