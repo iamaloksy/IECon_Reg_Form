@@ -102,7 +102,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Deadline Banner */}
-        {/* <motion.div
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 1 }}
@@ -112,7 +112,7 @@ const HeroSection = () => {
           <span className="text-primary-foreground font-display font-bold text-lg md:text-xl">
             Registration Deadline: 5th February 2026
           </span>
-        </motion.div> */}
+        </motion.div>
       </div>
     </section>
   );

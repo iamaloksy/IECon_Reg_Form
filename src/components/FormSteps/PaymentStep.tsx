@@ -9,9 +9,13 @@ interface PaymentStepProps {
   form: UseFormReturn<RegistrationFormData>;
 }
 
+
 const PaymentStep = ({ form }: PaymentStepProps) => {
-  const { setValue, watch } = form;
+  const { setValue, watch, formState } = form;
   const paymentScreenshot = watch("paymentScreenshot");
+
+  // Make payment step compulsory: show error if not uploaded
+  const isPaymentUploaded = !!paymentScreenshot;
 
   return (
     <motion.div
@@ -65,6 +69,11 @@ const PaymentStep = ({ form }: PaymentStepProps) => {
           value={paymentScreenshot}
           onChange={(file) => setValue("paymentScreenshot", file)}
         />
+        {!isPaymentUploaded && (
+          <div className="text-red-500 text-sm mt-2">
+            Payment screenshot is required to proceed.
+          </div>
+        )}
       </div>
     </motion.div>
   );

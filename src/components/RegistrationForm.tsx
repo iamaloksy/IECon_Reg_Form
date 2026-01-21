@@ -77,12 +77,22 @@ const RegistrationForm = ({ onSuccess }: RegistrationFormProps) => {
     return result;
   };
 
+
   const handleNext = async () => {
+    // Block next if on Payment step and screenshot not uploaded
+    if (currentStep === 5 && !form.getValues("paymentScreenshot")) {
+      toast({
+        title: "Payment screenshot required",
+        description: "Please upload your payment screenshot before proceeding.",
+        variant: "destructive",
+      });
+      return;
+    }
     const isValid = await validateCurrentStep();
     if (isValid && currentStep < totalSteps) {
       setCurrentStep((prev) => prev + 1);
     }
-  };
+  }
 
   const handlePrevious = () => {
     if (currentStep > 1) {
