@@ -95,7 +95,7 @@ export const legalStatusOptions = [
 
 export const startupStageOptions = [
   { value: "ideation", label: "Ideation Stage" },
-  { value: "validation", label: "Validation Stage" },
+  { value: "validation", label: "MVP" },
   { value: "early_traction", label: "Early Traction" },
-  { value: "scaling", label: "Scaling Stage" },
+  { value: "scaling", label: "Pre-Seed / Seed / Series Rounds" },
 ];
