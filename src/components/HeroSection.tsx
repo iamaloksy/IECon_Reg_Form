@@ -27,8 +27,8 @@ const highlights = [
 const HeroSection = () => {
   const { theme, setTheme } = useTheme();
   const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
-  // Set deadline to 12th Feb 2026, 23:59:59
-  const deadline = new Date("2026-02-12T23:59:59");
+  // Set deadline to 10th Feb 2026, 23:59:59
+  const deadline = new Date("2026-02-10T23:59:59");
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(deadline));
 
   useEffect(() => {
@@ -136,7 +136,7 @@ const HeroSection = () => {
           <div className="flex items-center gap-3">
             <Calendar className="w-6 h-6 text-primary-foreground" />
             <span className="text-primary-foreground font-display font-bold text-lg md:text-xl">
-              Registration Deadline: 12th February 2026
+              Registration Deadline: 10th February 2026
             </span>
           </div>
           <div className="mt-2 flex gap-4 text-primary-foreground font-mono text-lg md:text-xl">
